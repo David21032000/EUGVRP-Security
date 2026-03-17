@@ -48,14 +48,58 @@ async function sendLog(guild, action, color, user, moderator, reason) {
 }
 
 // Comenzi Slash
+// Înlocuiește array-ul "commands" cu acesta:
 const commands = [
-    { name: 'kick', description: 'Scoate un user (Owner)', options: [{ name: 'user', type: 6, required: true }, { name: 'motiv', type: 3 }] },
-    { name: 'ban', description: 'Fake ban (Restrictie acces)', options: [{ name: 'user', type: 6, required: true }, { name: 'motiv', type: 3 }] },
-    { name: 'shadowban', description: 'Elimină roluri + Rol Banat', options: [{ name: 'user', type: 6, required: true }, { name: 'motiv', type: 3 }] },
-    { name: 'lockdown', description: 'Blochează serverul' },
-    { name: 'unlock', description: 'Deblochează serverul' },
-    { name: 'clear', description: 'Șterge mesaje', options: [{ name: 'numar', type: 4, required: true }] },
-    { name: 'antilink', description: 'ON/OFF Anti-Link', options: [{ name: 'status', type: 5, required: true }] }
+    { 
+        name: 'kick', 
+        description: 'Scoate un utilizator de pe server (Doar Owner)', 
+        options: [
+            { name: 'user', type: 6, description: 'Utilizatorul care va primi kick', required: true }, 
+            { name: 'motiv', type: 3, description: 'Motivul pentru kick', required: false }
+        ] 
+    },
+    { 
+        name: 'ban', 
+        description: 'Restricționează accesul unui utilizator (Fake Ban)', 
+        options: [
+            { name: 'user', type: 6, description: 'Utilizatorul vizat', required: true }, 
+            { name: 'motiv', type: 3, description: 'Motivul restricției', required: false }
+        ] 
+    },
+    { 
+        name: 'shadowban', 
+        description: 'Elimină toate rolurile și aplică rolul de Shadowban', 
+        options: [
+            { name: 'user', type: 6, description: 'Utilizatorul care va fi shadowbanned', required: true }, 
+            { name: 'motiv', type: 3, description: 'Motivul pentru shadowban', required: false }
+        ] 
+    },
+    { 
+        name: 'lockdown', 
+        description: 'Blochează posibilitatea de a scrie pe întreg serverul' 
+    },
+    { 
+        name: 'unlock', 
+        description: 'Deblochează serverul după un lockdown' 
+    },
+    { 
+        name: 'clear', 
+        description: 'Șterge un număr de mesaje', 
+        options: [
+            { name: 'numar', type: 4, description: 'Câte mesaje să șterg (1-100)', required: true }
+        ] 
+    },
+    { 
+        name: 'antilink', 
+        description: 'Activează sau dezactivează protecția anti-link', 
+        options: [
+            { name: 'status', type: 5, description: 'True pentru activat, False pentru dezactivat', required: true }
+        ] 
+    },
+    { 
+        name: 'logs', 
+        description: 'Vezi ultimele acțiuni de securitate înregistrate' 
+    }
 ];
 
 client.once(Events.ClientReady, async () => {
